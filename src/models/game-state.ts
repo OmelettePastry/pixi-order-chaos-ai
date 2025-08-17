@@ -1,3 +1,4 @@
+import { DEFAULT_BOARD_SIZE } from "../constants/game-constants";
 import type { Terminal } from "../types/terminal";
 import { Mark } from "./mark";
 import { Player } from "./player";
@@ -12,29 +13,16 @@ export class GameState {
     constructor(board: Mark[][], playerTurn: Player, terminalStatus: Terminal);
 
     constructor(board?: Mark[][], playerTurn?: Player, terminalStatus?: Terminal) {
-        if (board === undefined) {
-            this._board = Array(6).fill(0).map(() => Array(6).fill(Mark._));
-        } else {
-            this._board = board.map(row => [...row]);
-        }
+        // If no board is provided, create a new 6x6 board, otherwise deep copy the provided board.
+        this._board = board?.map(row => [...row]) ?? Array(6).fill(0).map(() => Array(6).fill(Mark._));
 
-        if (playerTurn === undefined) {
-            this._playerTurn = Player.Order;
-        } else {
-            this._playerTurn = playerTurn;
-        }
+        // If no player turn is provided, default to Player.Order.
+        this._playerTurn = playerTurn ?? Player.Order;
 
-        if (terminalStatus === undefined) {
-            this._terminalStatus = {
-                isTerminal: false,
-                winner: null
-            };
-        } else {
-            this._terminalStatus = {
-                isTerminal: terminalStatus.isTerminal,
-                winner: terminalStatus.winner
-            };
-        }
+        // If no terminal status is provided, create a new non-terminal status, otherwise deep copy the provided status.
+        this._terminalStatus = terminalStatus
+            ? { isTerminal: terminalStatus.isTerminal, winner: terminalStatus.winner }
+            : { isTerminal: false, winner: null };
     }
 
     get boardCopy(): Mark[][] {
