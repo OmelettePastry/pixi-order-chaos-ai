@@ -14,7 +14,7 @@ export class GameState {
 
     constructor(board?: Mark[][], playerTurn?: Player, terminalStatus?: Terminal) {
         // If no board is provided, create a new 6x6 board, otherwise deep copy the provided board.
-        this._board = board?.map(row => [...row]) ?? Array(6).fill(0).map(() => Array(6).fill(Mark._));
+        this._board = board?.map(row => [...row]) ?? Array(DEFAULT_BOARD_SIZE).fill(0).map(() => Array(DEFAULT_BOARD_SIZE).fill(Mark._));
 
         // If no player turn is provided, default to Player.Order.
         this._playerTurn = playerTurn ?? Player.Order;
