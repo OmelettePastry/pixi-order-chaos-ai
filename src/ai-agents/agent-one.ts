@@ -5,7 +5,7 @@ import type { Action } from "../types/action";
 import type { HeuristicFunction } from "../types/heuristic-function";
 import type { MoveValue } from "../types/move-value";
 
-export class AgentOne {
+export class AlphaBetaSearch {
 
     private heuristic: HeuristicFunction;
 
