@@ -162,8 +162,17 @@ export class Game {
     }
 
     utility(state: GameState, player: Player): number {
-        let dummy = 0;
-        return dummy;
+        const terminalStatus = state.terminalStatusCopy;
+
+        if (terminalStatus.winner === player) {
+            return Infinity;
+        } 
+        
+        if (terminalStatus.winner !== null && terminalStatus.winner !== player) {
+            return -Infinity;
+        }
+
+        return 0;
     }
 
     isCutoff(depth: number) {
