@@ -171,8 +171,7 @@ export class Game {
     }
 
     isTerminal(state: GameState): boolean {
-        let dummy = false;
-        return dummy;
+        return state.terminalStatusCopy.isTerminal;
     }
 
     toMove(state: GameState): Player {
